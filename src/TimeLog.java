@@ -14,12 +14,10 @@ public class TimeLog {
 	private HBox hBox;
 	
 	public TimeLog(Time currentTime, Time startTime, Time endTime, boolean inWorkMode) {
-		System.out.println("new timelog");
 		this.currentTime = currentTime;
 		this.startTime = startTime;
 		this.endTime = endTime;
 		this.differenceTime = endTime.difference(startTime);
-		System.out.println("dubug: " + startTime + " | " + endTime + " | " + differenceTime);
 		this.inWorkMode = inWorkMode;
 		createTimeLogView();
 	}

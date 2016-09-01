@@ -46,7 +46,7 @@ public class Time implements Serializable{
 			}
 			hours = newHours;
 		}
-		
+
 		minutes = newMinutes;
 	}
 	

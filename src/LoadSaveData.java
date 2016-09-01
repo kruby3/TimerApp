@@ -20,11 +20,6 @@ public class LoadSaveData {
 			output = new ObjectOutputStream(new FileOutputStream(file, false));
 			output.writeObject(projectList);
 			output.close();
-			System.out.println("-----saving");
-			for(Project p : projectList) {
-				System.out.println(p);
-			}
-			System.out.println("-----end");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -47,9 +42,6 @@ public class LoadSaveData {
 			loadFile();
 			input = new ObjectInputStream(new FileInputStream(file));
 			projectList = (ArrayList<Project>)(input.readObject());
-			for(Project p : projectList) {
-				System.out.println(p);
-			}
 			input.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

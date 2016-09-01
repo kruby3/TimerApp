@@ -19,7 +19,7 @@ public class TimerApp extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		try { 
+		try {
             FXMLLoader projectSceneloader = new FXMLLoader(TimerApp.class.getResource("projectSelectScene.fxml"));
             BorderPane projectSceneLayout = (BorderPane) projectSceneloader.load();
             Scene projectScene = new Scene(projectSceneLayout);
@@ -28,7 +28,7 @@ public class TimerApp extends Application{
         } catch (IOException e) {
             e.printStackTrace();
         }
-	
+
     }
 
 	public ArrayList<Project> getProjectData() {

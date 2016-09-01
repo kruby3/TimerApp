@@ -96,7 +96,6 @@ public class ProjectSceneController {
 	private void updateVBoxList() {
 		projectVBoxList.clear();
 		for(Project p : timerApp.getProjectData()) {
-			System.out.println(p);
 			projectVBoxList.add(p.getProjectView());
 		}
 		projectListView.setItems(FXCollections.observableList(projectVBoxList));
@@ -110,7 +109,7 @@ public class ProjectSceneController {
 			return null;
 		}
 	}
-	
+
 	@FXML
 	private void deleteProject() {
 		Project selectedProject = getSelectedProject();
@@ -139,7 +138,6 @@ public class ProjectSceneController {
 	}
 	
 	private void saveProjectList() {
-		System.out.println("save");
 		LoadSaveData.saveProjectData(timerApp.getProjectData());
 	}
 	

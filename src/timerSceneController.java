@@ -56,13 +56,12 @@ public class timerSceneController {
 	private Timeline timer;
 	private boolean isWorking;
 	private TimeLogList timeLogList;
-	private Project currentProject;
+	private Project selectedProject;
 	private TimerApp timerApp;
-	private Project oldProject;
+	//private Project oldProject;
 	
 	public timerSceneController(Project selectedProject, TimerApp timerApp) {
-		currentProject = new Project(selectedProject.getName());
-		oldProject = selectedProject;
+		this.selectedProject = selectedProject;
 		this.timerApp = timerApp;
 		time = new Time();
 		workTime = new Time();
@@ -80,7 +79,7 @@ public class timerSceneController {
 	}
 	
 	private void initCurrentProjectLabel() {
-		currentProjectLabel.setText(currentProject.getName());
+		currentProjectLabel.setText(selectedProject.getName());
 	}
 	private void initStartStopButton() {
 		startStopButton.selectedProperty().addListener((observable, oldValue, newValue) -> {
@@ -104,25 +103,23 @@ public class timerSceneController {
 			breakSliderLabel.setText(breakTime.toString());
 		});
 	}
-	
+
 	private void initTimer() {
 		timer = new Timeline(new KeyFrame( Duration.seconds(1),
-				new EventHandler<ActionEvent>(){  
-				     @Override  
-				     public void handle(ActionEvent event) {  
+				new EventHandler<ActionEvent>(){
+				     @Override
+				     public void handle(ActionEvent event) {
 				          try {
 							time.decreaseMinute();
 						} catch (OutOfTimeException e) {
 							timesUp();
 						}
 				          timeLabel.setText(time.toString());
-				          //updateModeTime();
-				          System.out.println(workTime + " | " + time);
 				     }
 				}));
 		timer.setCycleCount(Animation.INDEFINITE);
 	}
-	
+
 	private void timesUp() {
 		timer.pause();
 		final Runnable runnable = (Runnable) Toolkit.getDefaultToolkit().getDesktopProperty("win.sound.default");
@@ -131,13 +128,6 @@ public class timerSceneController {
         }
 	}
 	
-	private void updateModeTime() {
-		if (isWorking) {
-			workTime = time;
-		} else {
-			breakTime = time;
-		}
-	}
 	@FXML
 	private void startWorking() {
 		updateTimeLogList();
@@ -197,11 +187,9 @@ public class timerSceneController {
        
 	}
 	private void save(){
-		currentProject.add(timeLogList.getTotalWorkTime(), LocalDate.now());
+		selectedProject.add(timeLogList.getTotalWorkTime(), LocalDate.now());
 		ArrayList<Project> projectData = timerApp.getProjectData();
-		projectData.remove(oldProject);
-		projectData.add(currentProject);
-		System.out.println("saving data");
+		timerApp.setProjectData(projectData);
 		LoadSaveData.saveProjectData(projectData);
 	}
 	

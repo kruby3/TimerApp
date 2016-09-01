@@ -27,7 +27,6 @@ public class LineGraph {
 			String date = dayLog.getDate().toString();
 			Number totalMins = dayLog.getTotalMins();
 			series.getData().add(new XYChart.Data(date, totalMins));
-			System.out.println("Added: " + date + " | " + totalMins);
 		}
 		lineChart.getData().add(series);
 		lineChart.setPrefSize(367, 375);
