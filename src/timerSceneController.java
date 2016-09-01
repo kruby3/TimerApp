@@ -130,7 +130,9 @@ public class timerSceneController {
 	
 	@FXML
 	private void startWorking() {
-		updateTimeLogList();
+	    if (timeLogList.getArrayList().size() != 0) {
+            updateTimeLogList();
+        }
 		startStopButton.setText("Start Break");
 		modeStatusLabel.setText("working");
 		isWorking = true;
