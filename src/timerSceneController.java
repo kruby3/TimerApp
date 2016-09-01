@@ -165,7 +165,11 @@ public class timerSceneController {
 	}
 	
 	private void updateTimeLogList() {
-		timeLogList.add(new TimeLog(getCurrentTime(), workTime, time, isWorking));
+	    if (isWorking) {
+            timeLogList.add(new TimeLog(getCurrentTime(), workTime, time, isWorking));
+        } else {
+            timeLogList.add(new TimeLog(getCurrentTime(), breakTime, time, isWorking));
+        }
 		timeLogListView.setItems(FXCollections.observableList(timeLogList.getArrayList()));
 		totalWorkTimeLabel.setText(timeLogList.getTotalWorkTime().toString());
 		totalBreakTimeLabel.setText(timeLogList.getTotalBreakTime().toString());
